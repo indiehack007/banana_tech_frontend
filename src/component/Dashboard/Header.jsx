@@ -16,7 +16,7 @@ const Header = () => {
     setSelectedOption,
   } = useContext(UserContext);
   const website = websites?.map((websiteData) => websiteData.website) || [];
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (websites?.length > 0) {
       setSelectedOption(websites[0].website);

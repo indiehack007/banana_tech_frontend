@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
   const [profile, setprofile] = useState();
   const [data, setData] = useState();
   const [selectedOption, setSelectedOption] = useState("Select a website");
-  const [websites, setWebsites] = useState([]); // Array to hold the websites
+  const [websites, setWebsites] = useState([]); 
   const [selectedWebsite, setSelectedWebsite] = useState(); // Variable to keep track of the selected website
   const [selectedTemplate, setSelectedTemplate] = useState(); // Variable to keep track of the selected website
 

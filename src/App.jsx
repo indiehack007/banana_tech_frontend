@@ -22,7 +22,6 @@ function App() {
         );
         const userData = await res.json();
         const data = await setDataUser(userData[0]);
-        document.cookie = "__Host-ss=value; SameSite=None; Secure; Path=/";
         setWebsites(data);
         setprofile(userData[1].picture);
         setUser(userData[0]);

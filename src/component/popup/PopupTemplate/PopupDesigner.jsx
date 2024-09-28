@@ -33,7 +33,6 @@ function PopupDesigner() {
 
   useEffect(() => {
     // Set the cookie on mount
-    document.cookie = "__Host-ss=value; SameSite=None; Secure; Path=/";
 
     if (selectedTemplate) {
       setFormData((prev) => ({
@@ -149,7 +148,7 @@ function PopupDesigner() {
         });
 
         alert("Form submitted successfully");
-        // navigate("/");
+        navigate("/");
       } catch (error) {
         console.error("Error submitting form:", error);
       }

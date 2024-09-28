@@ -15,8 +15,6 @@ const Header = () => {
     selectedOption,
     setSelectedOption,
   } = useContext(UserContext);
-  const navigate = useNavigate();
-
   const website = websites?.map((websiteData) => websiteData.website) || [];
 
   useEffect(() => {

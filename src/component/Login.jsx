@@ -65,9 +65,8 @@ const LoginPage = () => {
           throw new Error("Failed to fetch user data");
         }
         const userData = await res.json();
-        document.cookie = "__Host-ss=value; SameSite=None; Secure; Path=/";
+        const dataFetched = await setDataUser(userData[0]);
         localStorage.setItem("accessToken", access_token);
-        const dataFetched = setDataUser(userData[0]);
         setWebsites(dataFetched);
         setprofile(userData[1].picture);
         setUser(userData[0]);

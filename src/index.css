@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.glow {
+    animation: rainbow-glow 1.5s infinite alternate;
+    padding: 0.25rem 0.5rem; /* Ensure padding is included in glow effect */
+    border-radius: 0.5rem; /* Make the edges rounded for a nice glow */
+    position: relative; /* For positioning of box-shadow */
+    z-index: 1; /* Ensure it appears above other elements */
+  }
+  
+  @keyframes rainbow-glow {
+    0% {
+      text-shadow: 0 0 5px rgba(255, 0, 0, 1);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    }
+    14% {
+      text-shadow: 0 0 5px rgba(255, 127, 0, 1);
+      box-shadow: 0 0 10px rgba(255, 127, 0, 0.7);
+    }
+    28% {
+      text-shadow: 0 0 5px rgba(255, 255, 0, 1);
+      box-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
+    }
+    42% {
+      text-shadow: 0 0 5px rgba(0, 255, 0, 1);
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+    }
+    57% {
+      text-shadow: 0 0 5px rgba(0, 0, 255, 1);
+      box-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
+    }
+    71% {
+      text-shadow: 0 0 5px rgba(75, 0, 130, 1);
+      box-shadow: 0 0 10px rgba(75, 0, 130, 0.7);
+    }
+    85% {
+      text-shadow: 0 0 5px rgba(148, 0, 211, 1);
+      box-shadow: 0 0 10px rgba(148, 0, 211, 0.7);
+    }
+    100% {
+      text-shadow: 0 0 5px rgba(255, 0, 0, 1);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    }
+  }
+  

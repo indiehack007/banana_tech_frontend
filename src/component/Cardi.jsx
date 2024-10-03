@@ -2,7 +2,7 @@
 function Cardi({ web }) {
   return (
     <div className="flex flex-col pb-4 w-full bg-white rounded-xl min-h-[200px]">
-      <img
+      <iframe
         loading="lazy"
         // eslint-disable-next-line react/prop-types
         src={web.link.website}

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import {
@@ -8,10 +8,12 @@ import {
   FaClipboardList,
   FaSignOutAlt,
 } from "react-icons/fa";
+import AddWebsitePopup from "./AddWebsitePopup";
 
 // eslint-disable-next-line react/prop-types
 const Sidebar = ({ fun }) => {
-  const { setUser } = useContext(UserContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setUser, websites } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -20,17 +22,32 @@ const Sidebar = ({ fun }) => {
     setUser(null);
     navigate("/");
   };
+  const handleClick = () => {
+    console.log(websites);
+    if (websites.length <= 0 || websites.templates?.length <= 0) {
+      alert("Please Add website");
+      return;
+    }
+    navigate("/popups");
+  };
 
   return (
     <div className="flex flex-col h-full">
-      <button className="m-4 w-4/5 p-3 bg-orange-500 text-white font-bold rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 whitespace-nowrap flex items-center">
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="m-4 w-4/5 p-3 bg-orange-500 text-white font-bold rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 whitespace-nowrap flex items-center"
+      >
         <FaPlus className="mr-2" /> {/* Add icon for the button */}
         Add Your Website
       </button>
+      <AddWebsitePopup
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
       <nav className="flex-grow flex flex-col justify-between">
         <ul>
           <li
-            onClick={() => navigate("/popups")}
+            onClick={handleClick}
             className="p-4 cursor-pointer flex items-center"
           >
             <FaClipboardList className="mr-2" /> {/* Icon for Poup */}
@@ -39,7 +56,7 @@ const Sidebar = ({ fun }) => {
           <li className="p-4 cursor-pointer flex items-center">
             <FaChartPie className="mr-2" /> {/* Icon for Analytics */}
             Analytics
-            <span className="ml-2 text-sm text-white bg-blue-500 rounded-full px-2 py-1 glow">
+            <span className="ml-2 text-sm text-white bg-orange-500 rounded-full px-2 py-1 ">
               Upcoming
             </span>
           </li>

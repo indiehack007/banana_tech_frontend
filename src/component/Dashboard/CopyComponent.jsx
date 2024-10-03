@@ -1,11 +1,10 @@
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
-
 const CopyComponent = () => {
   const { selectedWebsite, user } = useContext(UserContext);
   // Text to copy
   const textToCopy = `  <script  id="tech_popup" 
-  webid="${selectedWebsite._id}" userid="${user._id}"  
+  webid="${selectedWebsite?._id}" userid="${user?._id}"  
   src="https://hospital-management-site.vercel.app/script.js" >
   </script>`;
 

@@ -1,5 +1,5 @@
 import { useGoogleLogin } from "@react-oauth/google";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "./UserContext";
 import { FaGoogle } from "react-icons/fa"; // Importing Google icon
 export const setDataUser = async (data) => {
@@ -42,6 +42,7 @@ export const setDataUser = async (data) => {
 };
 
 const LoginPage = () => {
+  const [loading, setLoading] = useState(false);
   const { setUser, setprofile, setWebsites } = useContext(UserContext);
 
   const login = useGoogleLogin({
@@ -50,6 +51,7 @@ const LoginPage = () => {
       console.log(response);
 
       try {
+        setLoading(true);
         const res = await fetch(
           "https://banana-tech.onrender.com/api/v1/googleuser",
           {
@@ -70,6 +72,7 @@ const LoginPage = () => {
         setWebsites(dataFetched);
         setprofile(userData[1].picture);
         setUser(userData[0]);
+        setLoading(false);
       } catch (error) {
         console.error("Error storing user data:", error);
         alert("Error logging in. Please try again.");
@@ -82,23 +85,28 @@ const LoginPage = () => {
   });
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="bg-white shadow-lg rounded-3xl p-10 w-96 border border-orange-300">
-        <h2 className="text-3xl font-semibold mb-6 text-center text-gray-800">
-          Welcome Back!
-        </h2>
-        <h3 className="text-xl text-center text-gray-600 mb-4">
-          Please login with your Google account
-        </h3>
-        <button
-          onClick={login}
-          className="w-full bg-orange-600 text-white font-semibold py-3 rounded-full flex items-center justify-center hover:bg-orange-700 transition duration-300 transform hover:scale-105"
-        >
-          <FaGoogle className="mr-2" />
-          Login with Google
-        </button>
+    <>
+      <div className="flex items-center justify-center min-h-screen bg-white">
+        <div className="bg-white shadow-lg rounded-3xl p-10 w-96 border border-orange-300">
+          <h2 className="text-3xl font-semibold mb-6 text-center text-gray-800">
+            Welcome Back!
+          </h2>
+          <h3 className="text-xl text-center text-gray-600 mb-4">
+            Please login with your Google account
+          </h3>
+          <button
+            onClick={login}
+            className="w-full bg-orange-600 text-white font-semibold py-3 rounded-full flex items-center justify-center hover:bg-orange-700 transition duration-300 transform hover:scale-105"
+          >
+            <FaGoogle className="mr-2" />
+            Login with Google
+          </button>
+        </div>
+        <div className="bottom-center">
+          {loading ? <h6>Logging in...</h6> : <></>}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

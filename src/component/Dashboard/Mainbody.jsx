@@ -3,13 +3,20 @@ import Maincontent from "./Maincontent";
 import Sidebar from "./Sidebar";
 import PopupComponenet from "../popup/PopupComponenet";
 import AddnewPoup from "../popup/PopupTemplate/AddnewPoup";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import WebsiteForm from "./WebsiteAddition.jsx/WebsiteForm";
+import { UserContext } from "../UserContext";
 
 const Mainbody = () => {
+  const { selectedWebsite } = useContext(UserContext);
   const [showcopyText, setshowcopyText] = useState(false);
   const navigate = useNavigate();
   const handleCopyClick = () => {
+    if (!selectedWebsite || selectedWebsite === "Select a website") {
+      navigate("/");
+      alert("Please add a website!");
+      return;
+    }
     setshowcopyText((i) => {
       return !i;
     });

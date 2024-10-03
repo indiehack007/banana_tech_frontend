@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 // Remove setheader or handle it inside the component if necessary
 const Header = () => {
+  const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {
@@ -16,7 +17,7 @@ const Header = () => {
     setSelectedOption,
   } = useContext(UserContext);
   const website = websites?.map((websiteData) => websiteData.website) || [];
-  const navigate = useNavigate();
+
   useEffect(() => {
     if (websites?.length > 0) {
       setSelectedOption(websites[0].website);

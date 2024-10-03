@@ -1,5 +1,7 @@
+
 // eslint-disable-next-line react/prop-types
 function PopupItem({ imageSrc, mainText, subText, onselect, index }) {
+
   return (
     <section
       onClick={() => onselect(index)}

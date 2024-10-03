@@ -1,18 +1,20 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { UserContext } from "../UserContext";
 import IndieHackerOS from "../IndieHacker";
 import CopyComponent from "./CopyComponent";
+import AddWebsitePopup from "./AddWebsitePopup";
 
 // eslint-disable-next-line react/prop-types
 const Maincontent = ({ showcopyText }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { websites } = useContext(UserContext); // Get websites from UserContext
 
   // Handle if websites is undefined or null to prevent potential runtime errors
   const websitesList = websites || [];
 
   const handleAdd = () => {
-    console.log("Add new website");
+    setIsModalOpen(true);
   };
 
   useEffect(() => {
@@ -46,6 +48,10 @@ const Maincontent = ({ showcopyText }) => {
           >
             <FaPlus className="mr-2" /> Add New Website
           </button>
+          <AddWebsitePopup
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
         </div>
       </div>
       {showcopyText && <CopyComponent />}

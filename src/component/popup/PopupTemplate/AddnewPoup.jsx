@@ -2,11 +2,22 @@ import { useState, useEffect, useContext } from "react";
 import PopupContainer from "../PopupContainer";
 import { UserContext } from "../../UserContext";
 import { useNavigate } from "react-router-dom";
+import { IKUpload } from "imagekitio-react";
 
 function AddnewPoup() {
   const { websites, selectedWebsite, user, setWebsites } =
     useContext(UserContext);
   const navigate = useNavigate();
+  const [imageURL, setimageURL] = useState(null);
+  const onError = (err) => {
+    console.err("Error", err);
+  };
+
+  const onSuccess = (res) => {
+    const { url } = res;
+    setimageURL(url);
+    console.log("Success", url);
+  };
   const popupData = {
     mainText: "",
     subText: "",
@@ -62,6 +73,15 @@ function AddnewPoup() {
   };
   const handleAction = async () => {
     try {
+      if (formData.mainText.length <= 0 || formData.subText.length <= 0) {
+        alert("Please fill the form");
+        return;
+      }
+      if (!imageURL) {
+        alert("Uploading Image Please wait");
+        return;
+      }
+      formData.imageUrl = imageURL;
       const response = await fetch(
         "https://banana-tech.onrender.com/api/v1/template",
         {
@@ -162,17 +182,20 @@ function AddnewPoup() {
               </div>
             </div>
 
+            <label className="sr-only">Upload Image</label>
             <div className="flex flex-col mt-7 w-full max-md:max-w-full">
-              <label className="sr-only">Upload Image</label>
               <div className="flex-1 shrink gap-3.5 self-stretch px-3.5 py-2.5 w-full max-w-[800px] rounded-md border-gray-300 border-solid border-[1.7px] min-h-[50px] text-ellipsis">
-                <input
-                  type="text"
-                  name="imageUrl"
-                  placeholder="Upload Image URL"
-                  value={formData.imageUrl}
-                  onChange={handleChange}
-                  className="w-full bg-transparent text-sm text-slate-500"
-                  aria-label="Upload Image URL"
+                <IKUpload
+                  style={{
+                    width: "100%",
+                    backgroundColor: "transparent",
+                    fontSize: "0.875rem", // Equivalent to text-sm
+                    color: "#64748b", // Equivalent to text-slate-500
+                  }}
+                  useUniqueFileName={true}
+                  isPrivateFile={false}
+                  onError={onError}
+                  onSuccess={onSuccess}
                 />
               </div>
             </div>

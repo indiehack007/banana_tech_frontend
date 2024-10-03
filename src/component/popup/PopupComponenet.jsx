@@ -7,7 +7,7 @@ import PopupDesigner from "./PopupTemplate/PopupDesigner";
 const PopupComponenet = () => {
   const { selectedWebsite } = useContext(UserContext);
   return (
-    <div className="flex">
+    <div className="flex ">
       <PopupContainer />
       {selectedWebsite ? <PopupDesigner /> : <VideoPopup />}
     </div>

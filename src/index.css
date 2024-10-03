@@ -9,7 +9,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000; /* Adjust as necessary */
-  padding: 150px; /* Increase padding for more height */
+  padding: 100px; /* Increase padding for more height */
   min-height: 50px; /* Optionally set a minimum height */
 }
 

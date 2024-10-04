@@ -19,15 +19,12 @@ const Header = () => {
   const website = websites?.map((websiteData) => websiteData.website) || [];
 
   useEffect(() => {
-    if (websites?.length > 0) {
-      setSelectedOption(websites[0].website);
-    }
-  }, [websites]);
-
-  useEffect(() => {
     if (selectedOption) {
       const data = getWebsiteDataByURL(selectedOption);
       setSelectedWebsite(data);
+    }
+    if (websites?.length > 0) {
+      setSelectedOption(websites[0].website);
     }
   }, [selectedOption, setSelectedWebsite, websites]);
 

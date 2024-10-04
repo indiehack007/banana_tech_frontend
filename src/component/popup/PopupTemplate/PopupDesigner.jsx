@@ -85,22 +85,23 @@ function PopupDesigner() {
           { method: "DELETE" }
         );
 
-        alert("Deleted successfully");
-        navigate("/");
         setWebsites((prevWebsites) => {
-          return prevWebsites.map((website) => {
+          const data = prevWebsites.map((website) => {
             if (website._id === selectedWebsite._id) {
               return {
                 ...website,
                 templates: website.templates.filter(
-                  (templateId) => templateId !== selectedTemplate._id
+                  (templateId) => templateId === selectedTemplate._id
                 ),
               };
             }
             return website;
           });
+          return data;
         });
         setSelectedTemplate(null);
+        alert("Deleted successfully");
+        navigate("/");
       } catch (error) {
         console.error("Error deleting template:", error);
       }

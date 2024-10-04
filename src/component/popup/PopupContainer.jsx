@@ -8,7 +8,7 @@ function PopupContainer() {
   const navigate = useNavigate();
   const { selectedWebsite, setSelectedTemplate } = useContext(UserContext);
   const dataobj = selectedWebsite || { templates: [] };
-  console.log(dataobj);
+
 
   const handleclick = (val) => {
     if (val < 0 || val >= dataobj.templates.length) return; // Check bounds

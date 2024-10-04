@@ -18,7 +18,6 @@ function ActionButton({ prop, web, imageSrc, width }) {
       const data = getWebsiteDataByURL(web.link.website);
       // eslint-disable-next-line react/prop-types
       setSelectedOption(web.link.website);
-      console.log(data);
       setSelectedWebsite(data);
       navigate("/popups");
     } else {

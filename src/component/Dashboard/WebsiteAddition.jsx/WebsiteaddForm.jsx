@@ -15,9 +15,7 @@ function WebsiteaddForm() {
   const onSuccess = (res) => {
     const { url } = res;
     setimageURL(url);
-    console.log("Success", url);
   };
-  // console.log(website)
   const popupData = {
     mainText: "",
     subText: "",
@@ -91,7 +89,6 @@ function WebsiteaddForm() {
           body: JSON.stringify(formData),
         }
       );
-      // console.log(response)
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -117,7 +114,6 @@ function WebsiteaddForm() {
       const dataofWebsite = data.websites.find(
         (item) => item.website === website
       );
-      console.log(dataofWebsite);
       const newWebsite = {
         _id: dataofWebsite._id,
         website: dataofWebsite.website,
@@ -125,6 +121,7 @@ function WebsiteaddForm() {
       };
 
       websites.push(newWebsite);
+
       setUser(data);
       alert("Form submitted");
       navigate("/");

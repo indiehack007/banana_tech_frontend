@@ -17,7 +17,6 @@ const Sidebar = ({ fun }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    console.log(!!localStorage.getItem("accessToken"));
     localStorage.removeItem("accessToken");
     setUser(null);
     navigate("/");

@@ -6,7 +6,7 @@ function WebsiteaddForm() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, setUser, websites } = useContext(UserContext);
-  const { website } = location.state || {}; 
+  const { website } = location.state || {};
   const [imageURL, setimageURL] = useState(null);
   const onError = (err) => {
     console.err("Error", err);
@@ -15,9 +15,7 @@ function WebsiteaddForm() {
   const onSuccess = (res) => {
     const { url } = res;
     setimageURL(url);
-    console.log("Success", url);
   };
-  // console.log(website)
   const popupData = {
     mainText: "",
     subText: "",
@@ -91,7 +89,6 @@ function WebsiteaddForm() {
           body: JSON.stringify(formData),
         }
       );
-      // console.log(response)
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -120,11 +117,11 @@ function WebsiteaddForm() {
       const newWebsite = {
         _id: dataofWebsite._id,
         website: dataofWebsite.website,
-        templates: result,
+        templates: [result],
       };
 
       websites.push(newWebsite);
-      // setWebsites(newwebsites);
+
       setUser(data);
       alert("Form submitted");
       navigate("/");

@@ -16,7 +16,6 @@ function AddnewPoup() {
   const onSuccess = (res) => {
     const { url } = res;
     setimageURL(url);
-    console.log("Success", url);
   };
   const popupData = {
     mainText: "",
@@ -126,7 +125,6 @@ function AddnewPoup() {
         webSiteWithArray.templates.push(fetchedData);
         return prevdata;
       });
-      console.log(getWebsiteDataByURL(website));
       // setSelectedWebsite();
       alert("Form submitted");
       navigate("/");

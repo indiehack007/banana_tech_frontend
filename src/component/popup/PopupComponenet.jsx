@@ -5,11 +5,11 @@ import { UserContext } from "../UserContext";
 import PopupDesigner from "./PopupTemplate/PopupDesigner";
 
 const PopupComponenet = () => {
-  const { selectedWebsite } = useContext(UserContext);
+  const { selectedWebsite, selectedTemplate } = useContext(UserContext);
   return (
     <div className="flex ">
       <PopupContainer />
-      {selectedWebsite ? <PopupDesigner /> : <VideoPopup />}
+      {selectedWebsite && selectedTemplate ? <PopupDesigner /> : <VideoPopup />}
     </div>
   );
 };

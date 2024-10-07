@@ -5,7 +5,10 @@ function Cardi({ web }) {
       <iframe
         loading="lazy"
         // eslint-disable-next-line react/prop-types
-        src={web.link.website}
+        // src={web.link.website}
+        src={
+          "https://miro.medium.com/v2/resize:fit:1200/1*2IgoP7ZhFeqQiPO7zx_J9g.jpeg"
+        }
         className="object-contain self-center w-full rounded-xl aspect-[1.49]"
       />
 

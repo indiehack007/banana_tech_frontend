@@ -9,6 +9,7 @@ function PopupContainer() {
   const { selectedWebsite, setSelectedTemplate } = useContext(UserContext);
   const dataobj = selectedWebsite || { templates: [] };
 
+
   const handleclick = (val) => {
     if (val < 0 || val >= dataobj.templates.length) return; // Check bounds
     const data = dataobj.templates[val];
@@ -21,9 +22,9 @@ function PopupContainer() {
     if (dataobj.templates.length > 0) {
       setSelectedTemplate(dataobj.templates[0]);
     } else {
-      setSelectedTemplate(null); // Clear selected template if no templates are available
+      setSelectedTemplate(null);
     }
-  }, [selectedWebsite]); // Only run when selectedWebsite changes
+  }, [selectedWebsite]);
 
   const handleAddnewpopup = () => {
     navigate("/add-new");

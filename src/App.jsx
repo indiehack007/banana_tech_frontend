@@ -53,8 +53,7 @@ function App() {
       }
       const data = await response.json();
       const { signature, expire, token } = data;
-      console.log(data);
-      console.log(signature, expire, token);
+
       return { signature, expire, token };
     } catch (error) {
       throw new Error(`Authentication request failed: ${error.message}`);
@@ -67,7 +66,7 @@ function App() {
       urlEndpoint={urlEndpoint}
       authenticator={authenticator}
     >
-      <div className="bottom-center">
+      <div className={access_token && !user ? "bottom-center" : ""}>
         {access_token && !user ? <h6>Logging in ...</h6> : null}
       </div>
 

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { UserContext } from "../UserContext";
 import IndieHackerOS from "../IndieHacker";
@@ -17,9 +17,6 @@ const Maincontent = ({ showcopyText }) => {
     setIsModalOpen(true);
   };
 
-  useEffect(() => {
-    console.log(websites, "websites");
-  }, [websites]);
 
   return (
     <div className="p-6">

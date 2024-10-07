@@ -4,11 +4,11 @@ import { UserContext } from "../UserContext";
 import AddWebsitePopup from "./AddWebsitePopup";
 import { useNavigate } from "react-router-dom";
 
-// Remove setheader or handle it inside the component if necessary
 const Header = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const {
     websites,
     profile,
@@ -16,15 +16,16 @@ const Header = () => {
     selectedOption,
     setSelectedOption,
   } = useContext(UserContext);
-  const website = websites?.map((websiteData) => websiteData.website) || [];
 
+  const websiteOptions =
+    websites?.map((websiteData) => websiteData.website) || [];
+
+  // Update the selected website when the component mounts or websites change
   useEffect(() => {
-    if (websites?.length > 0) {
+    if (websites?.length > 0 && !selectedOption) {
       setSelectedOption(websites[0].website);
     }
-  }, [websites]);
 
-  useEffect(() => {
     if (selectedOption) {
       const data = getWebsiteDataByURL(selectedOption);
       setSelectedWebsite(data);
@@ -36,7 +37,7 @@ const Header = () => {
   };
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    setIsDropdownOpen((prev) => !prev);
   };
 
   const handleOptionSelect = (option) => {
@@ -44,7 +45,6 @@ const Header = () => {
     const data = getWebsiteDataByURL(option);
     setSelectedWebsite(data);
     setIsDropdownOpen(false);
-    // navigate("/popups");
   };
 
   return (
@@ -93,8 +93,8 @@ const Header = () => {
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
                 <div className="p-2">
-                  {website.length > 0 ? (
-                    website.map((link, index) => (
+                  {websiteOptions.length > 0 ? (
+                    websiteOptions.map((link, index) => (
                       <button
                         key={index}
                         className="block w-full text-left px-4 py-2 text-sm text-black hover:bg-gray-100"
@@ -111,7 +111,7 @@ const Header = () => {
                   <div className="border-t border-gray-200 my-1" />
                   <button
                     className="block w-full text-left px-4 py-2 text-sm text-black hover:bg-gray-100"
-                    onClick={() => setIsModalOpen(true)} // Open the popup
+                    onClick={() => setIsModalOpen(true)}
                   >
                     Add Your Website
                   </button>

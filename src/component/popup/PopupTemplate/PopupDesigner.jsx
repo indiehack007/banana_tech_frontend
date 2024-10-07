@@ -35,7 +35,6 @@ function PopupDesigner() {
   const onSuccess = (res) => {
     const { url } = res;
     setimageURL(url);
-    console.log("Success", url);
   };
   const [radio, setRadio] = useState(
     formData.triggerEvent === 0 ? "onLoad" : "onScroll"
@@ -52,9 +51,8 @@ function PopupDesigner() {
   }, [selectedTemplate]);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
+
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // console.log(formData)
   };
 
   const handleRadioChange = (value) => {
@@ -85,22 +83,23 @@ function PopupDesigner() {
           { method: "DELETE" }
         );
 
-        alert("Deleted successfully");
-        navigate("/");
         setWebsites((prevWebsites) => {
-          return prevWebsites.map((website) => {
+          const data = prevWebsites.map((website) => {
             if (website._id === selectedWebsite._id) {
               return {
                 ...website,
                 templates: website.templates.filter(
-                  (templateId) => templateId !== selectedTemplate._id
+                  (templateId) => templateId._id !== selectedTemplate._id // Filter out the selected template
                 ),
               };
             }
             return website;
           });
+          return data;
         });
         setSelectedTemplate(null);
+        alert("Deleted successfully");
+        navigate("/");
       } catch (error) {
         console.error("Error deleting template:", error);
       }
@@ -155,7 +154,6 @@ function PopupDesigner() {
             }
             return i;
           });
-          console.log(value);
           return value;
         });
 

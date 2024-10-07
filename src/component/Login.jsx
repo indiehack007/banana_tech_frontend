@@ -48,7 +48,7 @@ const LoginPage = () => {
   const login = useGoogleLogin({
     onSuccess: async (response) => {
       const { access_token } = response;
-      console.log(response);
+
 
       try {
         setLoading(true);
@@ -102,7 +102,7 @@ const LoginPage = () => {
             Login with Google
           </button>
         </div>
-        <div className="bottom-center">
+        <div className={loading ? "bottom-center" : ""}>
           {loading ? <h6>Logging in...</h6> : <></>}
         </div>
       </div>
